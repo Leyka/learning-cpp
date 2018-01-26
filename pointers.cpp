@@ -15,7 +15,7 @@ void changeAge2(int age) {
 
 void changeAge3(int& age) {
     int* pAge = &age;
-    cout << "changeAge3, age " << age << " pointer value of age: " << pAge << endl;
+    cout << "changeAge3, age " << age << " pointer value of age: " << pAge << endl; // => &age : 000000B83AFCFB40, same 'age' object
     *pAge = 50;
     cout << "changeAge3,  " << age << " pointer value of age: " << pAge << endl;
 }
