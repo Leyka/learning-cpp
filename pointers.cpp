@@ -10,8 +10,15 @@ void changeAge(int* pAge) {
 
 void changeAge2(int age) {
     int* pAge = &age;
-    cout << "changeAge2, pointer value of age: " << pAge << endl; // => &age : 000000B83AFCFB20
+    cout << "changeAge2, pointer value of age: " << pAge << endl; // => &age : 000000B83AFCFB20 so it created a copy of age
     *pAge = 40;
+}
+
+void changeAge3(int& age) {
+    int* pAge = &age;
+    cout << "changeAge3, age " << age << " pointer value of age: " << pAge << endl;
+    *pAge = 50;
+    cout << "changeAge3,  " << age << " pointer value of age: " << pAge << endl;
 }
 
 int main() {
@@ -27,9 +34,13 @@ int main() {
     cout << "Age is now... " << *pAge << endl; // Age is now 30
 
     changeAge2(age);
-    cout << "Age is now... " << *pAge << endl; // Age is still 30, not 40. Not the same pointer reference..
+    cout << "Age (2) would still be the same " << *pAge << endl; // Age is still 30, not 40. Not the same pointer reference.
+
+    changeAge3(age);
+    cout << "Age (3) is now... " << *pAge << endl;
 
     // Trying something for fun
     int** mindBlown = &pAge;
+    cout << "------------" << endl;
     cout << "Reference of reference of Age: " << mindBlown << endl;
 }
