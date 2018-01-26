@@ -4,13 +4,13 @@
 using namespace std;
 
 void changeAge(int* pAge) {
-    cout << "changeAge, pointer value of age: " << pAge << endl; // => *age : 000000B83AFCFB40
+    cout << "changeAge, pointer value of age: " << pAge << endl; // => &age : 000000B83AFCFB40
     *pAge = 30;
 }
 
 void changeAge2(int age) {
     int* pAge = &age;
-    cout << "changeAge2, pointer value of age: " << pAge << endl; // => *age : 000000B83AFCFB20
+    cout << "changeAge2, pointer value of age: " << pAge << endl; // => &age : 000000B83AFCFB20
     *pAge = 40;
 }
 
@@ -20,7 +20,7 @@ int main() {
 
     // Create a pointer of 'age' variable
     int* pAge = &age;
-    cout << "pAge = &age = " << pAge << endl; // => *age : 000000B83AFCFB40
+    cout << "pAge = &age = " << pAge << endl; // => &age : 000000B83AFCFB40
     cout << "*pAge = " << *pAge << endl;
 
     changeAge(pAge);
