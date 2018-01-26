@@ -28,4 +28,8 @@ int main() {
 
     changeAge2(age);
     cout << "Age is now... " << *pAge << endl; // Age is still 30, not 40. Not the same pointer reference..
+
+    // Trying something for fun
+    int** mindBlown = &pAge;
+    cout << "Reference of reference of Age: " << mindBlown << endl;
 }
