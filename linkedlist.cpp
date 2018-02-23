@@ -43,7 +43,7 @@ struct LinkedList {
     } 
     else {
       Node* previous;
-      while (current && current->id != id) {
+      while (current->id != id) {
         previous = current;
         current = current->next;
       }
@@ -78,7 +78,6 @@ int main() {
   cout << "Deleting node..." << endl; 
 
   myLinkedList.removeNode(3);
-  myLinkedList.addNode("Bob"); 
   myLinkedList.print();
   return 0;
 }
