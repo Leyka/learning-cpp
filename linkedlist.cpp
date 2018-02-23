@@ -2,50 +2,83 @@
 
 using namespace std;
 
-class Node {
-  public:
-    string message;
-    Node* next;
+struct Node {
+  int id;
+  string message;
+  Node* next;
 
-    Node(string msg) {
-      message = msg;
-      next = nullptr;
-    }
+  Node (int id, string message) {
+    this->id = id;
+    this->message = message;
+    next = nullptr;
+  }
 };
 
-// TODO : Remove Node, Sort
-class LinkedList {
-  public:
-    Node* head;
-    
-    LinkedList() {
-      head = nullptr;
-    }
+struct LinkedList {
+  int currentId;
+  Node* head;
+  
+  LinkedList() {
+    currentId = 0;
+    head = nullptr;
+  }
 
-    void addNode(string message) {
-      if(!head) {
-        head = new Node(message);
-      } else {
-        Node* newHead = new Node(message);
-        newHead->next = head;
-        head = newHead;
+  void addNode(string message) {
+    currentId++;
+    if (!head) {
+      head = new Node(currentId, message);
+    } else {
+      Node* newHead = new Node(currentId, message);
+      newHead->next = head;
+      head = newHead;
+    }
+  }
+
+  void removeNode(int id) {
+    Node* current = head;
+
+    if (current->id == id) {
+      head = current->next;
+      delete current;
+    } 
+    else {
+      Node* previous;
+      while (current && current->id != id) {
+        previous = current;
+        current = current->next;
       }
+      previous->next = current->next;
+      delete current;
     }
+  }
 
-    void print() {
-      Node* node = head;
-      while(node) {
-        cout << node->message << endl;
-        node = node->next;
-      };
-    }
+  // TODO
+  void sort() {
+
+  }
+
+  void print() {
+    Node* node = head;
+    while (node) {
+      cout << node->id  << ": " << node->message << endl;
+      node = node->next;
+    };
+  }
 };
 
 int main() {
   LinkedList myLinkedList;
-  myLinkedList.addNode("Hello");
-  myLinkedList.addNode("Bonjour");
-  myLinkedList.print(); // head->next->next->message would be "Hello"
+  
+  myLinkedList.addNode("Hello"); // Id:1
+  myLinkedList.addNode("Bonjour"); // Id:2
+  myLinkedList.addNode("To be Deleted..."); // Id:3 
+  myLinkedList.addNode("The End"); // Id:4
+  myLinkedList.print();
 
+  cout << "Deleting node..." << endl; 
+
+  myLinkedList.removeNode(3);
+  myLinkedList.addNode("Bob"); 
+  myLinkedList.print();
   return 0;
 }
