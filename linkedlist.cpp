@@ -7,10 +7,10 @@ struct Node {
   string message;
   Node* next;
 
-  Node (int id, string message) {
+  Node(int id, string message) {
     this->id = id;
     this->message = message;
-    next = nullptr;
+    this->next = nullptr;
   }
 };
 
@@ -25,7 +25,7 @@ struct LinkedList {
 
   void addNode(string message) {
     currentId++;
-    if (!head) {
+    if(!head) {
       head = new Node(currentId, message);
     } else {
       Node* newHead = new Node(currentId, message);
@@ -37,13 +37,13 @@ struct LinkedList {
   void removeNode(int id) {
     Node* current = head;
 
-    if (current->id == id) {
+    if(current->id == id) {
       head = current->next;
       delete current;
     } 
     else {
       Node* previous;
-      while (current->id != id) {
+      while(current->id != id) {
         previous = current;
         current = current->next;
       }
@@ -52,14 +52,30 @@ struct LinkedList {
     }
   }
 
-  // TODO
-  void sort() {
-
+  // Order message ascending [ O(N²) ]
+  void sortAsc() {
+    Node* current = head;
+    while(current != nullptr) {
+      Node* explorer = current->next;
+      string temp;
+      // Basically, I'll have an explorer cursor that will loop through the list
+      // and check if it finds a lower value than the current
+      while (explorer != nullptr) {
+        if (current->message > explorer->message) {
+          // Swap
+          temp = current->message;
+          current->message = explorer->message;
+          explorer->message = temp;
+        }
+        explorer = explorer->next;
+      }
+      current = current->next;
+    }
   }
 
   void print() {
-    Node* node = head;
-    while (node) {
+    Node *node = head;
+    while(node) {
       cout << node->id  << ": " << node->message << endl;
       node = node->next;
     };
@@ -75,9 +91,13 @@ int main() {
   myLinkedList.addNode("The End"); // Id:4
   myLinkedList.print();
 
-  cout << "Deleting node..." << endl; 
-
+  cout << "Deleting node 3.." << endl; 
   myLinkedList.removeNode(3);
   myLinkedList.print();
+
+  cout << "Sorting.." << endl;
+  myLinkedList.sortAsc();
+  myLinkedList.print();
+
   return 0;
 }
