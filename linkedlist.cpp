@@ -55,9 +55,11 @@ struct LinkedList {
   // Order message ascending [ O(N²) ]
   void sortAsc() {
     Node* current = head;
+    Node* explorer;    
+    string temp;
+
     while(current != nullptr) {
-      Node* explorer = current->next;
-      string temp;
+      explorer = current->next;
       // Basically, I'll have an explorer cursor that will loop through the list
       // and check if it finds a lower value than the current
       while (explorer != nullptr) {
